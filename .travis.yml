@@ -1,0 +1,4 @@
+dist: xenial
+before_install:
+  - "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+script: earthly ./examples/c+build
