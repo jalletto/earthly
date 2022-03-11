@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  test-and-lint:
+  run-example-builds:
     machine:
       image: ubuntu-1604:201903-01
     steps:
@@ -11,3 +11,7 @@ jobs:
       - run: earthly ./examples/c+build
       # - run: earthly -P +test
       # - run: earthly --ci --push +docker
+workflows:
+  build-and-test-workflow:
+    jobs:
+      - run-example-builds
