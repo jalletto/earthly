@@ -1,17 +1,31 @@
+# version: 2.1
+# jobs:
+#   run-example-builds:
+#     machine:
+#       image: ubuntu-1604:201903-01
+#     steps:
+#       - checkout
+#       # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
+#       - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+#       - run: earthly --version
+#       - run: earthly ./examples/c+build
+#       # - run: earthly -P +test
+#       # - run: earthly --ci --push +docker
+# workflows:
+#   build-and-test-workflow:
+#     jobs:
+#       - run-example-builds
+
 version: 2.1
 jobs:
-  run-example-builds:
+  build-and-test-c:
     machine:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
-      # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-      - run: earthly --version
-      - run: earthly ./examples/c+build
-      # - run: earthly -P +test
-      # - run: earthly --ci --push +docker
+      - run: apt-get update && apt-get -y install cmake
+      -  cmake ./examples/c/src
 workflows:
   build-and-test-workflow:
     jobs:
-      - run-example-builds
+      - build-and-test-c
