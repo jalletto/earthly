@@ -16,7 +16,9 @@ addons:
 
 script:
   - cd ./examples/c
+  - pwd
   - cmake test
+  - ls
   - make
 
 #       - run:
