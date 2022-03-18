@@ -43,7 +43,7 @@ jobs:
           command: ./examples/c/unit-test 
   build-c:
     docker:
-      - image: "alpine"
+      - image: "alpine" 
     steps:
       - checkout
       - run:
