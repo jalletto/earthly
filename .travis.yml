@@ -8,7 +8,13 @@ language: c
 compiler:
   - gcc
 
-install: make build-base cmake cunit-dev
+addons:
+  apt:
+    update: true
+    packages:
+    - cmake
+    - build-base
+    - cunit-dev
 
 script:
   - cd ./examples/c
