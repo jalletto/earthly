@@ -34,10 +34,10 @@ jobs:
           command: 'apt-get update && sudo apt-get install -y cmake'
       - run:
           name: Creating Build Files
-          command: 'cmake ./examples/c'
+          command: 'cmake ./examples/c/src'
       - run:
           name: Run Make
-          command: make ./examples/c/src
+          command: make ./examples/c
 workflows:
   build-and-test-workflow:
     jobs:
