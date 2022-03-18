@@ -1,30 +1,30 @@
-# version: 2.1
-# jobs:
-#   run-tests:
-#     machine:
-#       image: ubuntu-1604:201903-01
-#     steps:
-#       - checkout
-#       # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-#       - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-#       - run: earthly --version
-#       - run: earthly -P ./examples/c+unit-test
-#   run-build:
-#     machine:
-#       image: ubuntu-1604:201903-01
-#     steps:
-#       - checkout
-#       # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-#       - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-#       - run: earthly --version
-#       - run: earthly -P ./examples/c+build
-# workflows:
-#   build-and-test-workflow:
-#     jobs:
-#       - run-tests
-#       - run-build:
-#           requires:
-#             - run-tests
+version: 2.1
+jobs:
+  run-tests:
+    machine:
+      image: ubuntu-2004:current
+    steps:
+      - checkout
+      # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
+      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - run: earthly --version
+      - run: earthly -P ./examples/c+unit-test
+  run-build:
+    machine:
+      image: ubuntu-2004:current
+    steps:
+      - checkout
+      # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
+      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - run: earthly --version
+      - run: earthly -P ./examples/c+build
+workflows:
+  build-and-test-workflow:
+    jobs:
+      - run-tests
+      - run-build:
+          requires:
+            - run-tests
 
 # version: 2.1
 # jobs:
@@ -80,31 +80,31 @@
 #           requires:
 #             - test-c
 
-version: 2.1
-jobs:
-  test-c:
-    docker:
-      - image: "alpine"
-    steps:
-      - checkout
-      - run:
-          name: Installing SUDO
-          command: 'apk update && apk add sudo'
-      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-      - run: earthly --version
-      - run: earthly -P ./examples/c+unit-test
-  build-c:
-    docker:
-      - image: "alpine"
-    steps:
-      - checkout
-      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-      - run: earthly --version
-      - run: earthly -P ./examples/c+build
-workflows:
-  build-and-test-workflow:
-    jobs:
-      - test-c
-      - build-c:
-          requires:
-            - test-c
+# version: 2.1
+# jobs:
+#   test-c:
+#     docker:
+#       - image: "alpine"
+#     steps:
+#       - checkout
+#       - run:
+#           name: Installing SUDO
+#           command: 'apk update && apk add sudo'
+#       - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+#       - run: earthly --version
+#       - run: earthly -P ./examples/c+unit-test
+#   build-c:
+#     docker:
+#       - image: "alpine"
+#     steps:
+#       - checkout
+#       - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+#       - run: earthly --version
+#       - run: earthly -P ./examples/c+build
+# workflows:
+#   build-and-test-workflow:
+#     jobs:
+#       - test-c
+#       - build-c:
+#           requires:
+#             - test-c
