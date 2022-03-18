@@ -40,7 +40,7 @@ jobs:
           command: make ./examples/c
       - run:
           name: Run Unit Tests
-          command: ./examples/c/unit-test
+          command: ./examples/c/unit-test 
   build-c:
     docker:
       - image: "alpine"
