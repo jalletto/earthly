@@ -8,15 +8,20 @@ language: c
 compiler:
   - gcc
 
-addons:
-  apt:
-    update: true
-    packages:
-    - cmake
-    - libcunit1-dev
+jobs:
+  include:
+    - stage: test
+      addons:
+        apt:
+          update: true
+          packages:
+          - cmake
+          - libcunit1-dev
 
-script:
-  - cd ./examples/c
-  - cmake test
-  - make
-  - ./unit-test 
+      script:
+        - cd ./examples/c
+        - cmake test
+        - make
+        - ./unit-test 
+
+
