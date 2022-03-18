@@ -8,9 +8,11 @@ language: c
 compiler:
   - gcc
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get -y install build-base cmake cunit-dev
+addons:
+  apt:
+    update: true
+    packages:
+    - cmake
 
 script:
   - cd ./examples/c
