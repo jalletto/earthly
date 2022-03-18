@@ -30,8 +30,8 @@ jobs:
           name: Installing GCC
           command: 'apk update && apk add gcc g++'
       - run:
-        name: Install build base
-        command: sudo apk --update add build-base cmake
+          name: Install build base
+          command: sudo apk --update add build-base cmake
       # - run:
       #     name: Install CMAKE
       #     command: 'apk update && sudo apk add cmake '
