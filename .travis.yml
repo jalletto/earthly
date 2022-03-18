@@ -1,8 +1,7 @@
 dist: alpine
 install:
-  - cat /etc/*-release
   - "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-script: earthly ./examples/c+build
+script: cat /etc/*-release && earthly ./examples/c+build
 
 # dist: alpine
 
