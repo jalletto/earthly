@@ -23,6 +23,7 @@ jobs:
       - image: "alpine"
     steps:
       - checkout
+      - run: cat /etc/*-release
       - run:
           name: Installing SUDO
           command: 'apk update && apk add sudo'
@@ -40,7 +41,7 @@ jobs:
           command: cd ./examples/c && make
       - run:
           name: Run Unit Tests
-          command: ./examples/c/unit-test 
+          command: ./examples/c/unit-test
   build-c:
     docker:
       - image: "alpine" 
