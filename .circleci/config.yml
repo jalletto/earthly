@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run:
           name: Installing SUDO
-          command: 'apk update && apk add sudo && rm -rf /var/lib/apt/lists/*'
+          command: 'apk update && apk add sudo'
       - run:
           name: Installing GCC
           command: 'apk update && apk add gcc g++'
@@ -48,7 +48,7 @@ jobs:
       - checkout
       - run:
           name: Installing SUDO
-          command: 'apk update && apk add sudo && rm -rf /var/lib/apt/lists/*'
+          command: 'apk update && apk add sudo'
       - run:
           name: Installing GCC
           command: 'apk update && apk add gcc g++'
