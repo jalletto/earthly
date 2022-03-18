@@ -87,19 +87,19 @@ jobs:
       - image: "earthly/earthly"
     steps:
       - checkout
-      - run:
-          name: Installing SUDO
-          command: 'apk update && apk add sudo'
-      - run: apk add docker
-      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      # - run:
+      #     name: Installing SUDO
+      #     command: 'apk update && apk add sudo'
+      # - run: apk add docker
+      # - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
       - run: earthly --version
       - run: earthly -P ./examples/c+unit-test
   build-c:
     docker:
       - image: "earthly/earthly"
     steps:
-      - checkout
-      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      # - checkout
+      # - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
       - run: earthly --version
       - run: earthly -P ./examples/c+build
 workflows:
