@@ -66,4 +66,6 @@ workflows:
   build-and-test-workflow:
     jobs:
       - test-c
-      - build-c
+      - build-c:
+          requires:
+            - test-c
