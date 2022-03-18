@@ -33,3 +33,4 @@ jobs:
         - cd ./examples/c
         - cmake src
         - make
+
