@@ -23,7 +23,7 @@ jobs:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
-      - run: apt-get update && apt-get -y install cmake
+      - run: apt-get -y install cmake
       - run: cmake ./examples/c/src
 workflows:
   build-and-test-workflow:
