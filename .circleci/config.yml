@@ -25,13 +25,13 @@ jobs:
       - checkout
       - run:
           name: Installing SUDO
-          command: 'apk update && apk install sudo && rm -rf /var/lib/apt/lists/*'
+          command: 'apk update && apk add sudo && rm -rf /var/lib/apt/lists/*'
       - run:
           name: Installing GCC
-          command: 'apk update && apk install gcc g++'
+          command: 'apk update && apk add gcc g++'
       - run:
           name: Install CMAKE
-          command: 'apk update && sudo apk install cmake '
+          command: 'apk update && sudo apk add cmake '
       - run:
           name: Creating Build Files
           command: 'cmake ./examples/c/src'
