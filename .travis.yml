@@ -13,6 +13,7 @@ addons:
     update: true
     packages:
     - cmake
+    - libcunit1-dev
 
 script:
   - cd ./examples/c
