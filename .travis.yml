@@ -17,26 +17,6 @@ addons:
 
 script:
   - cd ./examples/c
-  - pwd
   - cmake test
-  - ls
   - make
-
-#       - run:
-#           name: Installing SUDO
-#           command: 'apk update && apk add sudo
-#       - run:
-#           name: Installing GCC
-#           command: 'apk update && apk add gcc g++'
-#       - run:
-#           name: Install build-base and make and cunit-dev
-#           command: sudo apk --update add build-base cmake cunit-dev
-#       - run:
-#           name: Creating Build Files
-#           command: 'cd ./examples/c/ && cmake test'
-#       - run:
-#           name: Run Make
-#           command: cd ./examples/c && make
-#       - run:
-#           name: Run Unit Tests
-#           command: ./examples/c/unit-test 
+  - ./unit-test 
