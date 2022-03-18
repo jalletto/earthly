@@ -37,7 +37,7 @@ jobs:
           command: 'cd ./examples/c/ && cmake test'
       - run:
           name: Run Make
-          command: make ./examples/c
+          command: cd ./examples/c make
       - run:
           name: Run Unit Tests
           command: ./examples/c/unit-test 
