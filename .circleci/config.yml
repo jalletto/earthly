@@ -40,8 +40,4 @@ workflows:
   version: 2
   circle-ci:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - main
+      - build
