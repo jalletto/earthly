@@ -1,6 +1,15 @@
 version: 2.1
 jobs:
-  run-tests:
+  # run-tests:
+  #   machine:
+  #     image: ubuntu-2004:current
+  #   steps:
+  #     - checkout
+  #     # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
+  #     - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+  #     - run: earthly --version
+  #     - run: earthly -P ./examples/c+unit-test
+  run-examples:
     machine:
       image: ubuntu-2004:current
     steps:
@@ -8,23 +17,11 @@ jobs:
       # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
       - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
       - run: earthly --version
-      - run: earthly -P ./examples/c+unit-test
-  run-build:
-    machine:
-      image: ubuntu-2004:current
-    steps:
-      - checkout
-      # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-      - run: earthly --version
-      - run: earthly -P ./examples/c+build
+      - run: earthly -P +examples
 workflows:
   build-and-test-workflow:
     jobs:
-      - run-tests
-      - run-build:
-          requires:
-            - run-tests
+      - run-examples
 
 # version: 2.1
 # jobs:
