@@ -4,10 +4,10 @@ install:
 
 jobs:
   include:
-    - stage: test
-      script: earthly ./examples/c+unit-test
+    # - stage: test
+    #   script: earthly ./examples/c+unit-test
     - stage: build
-      script: earthly ./examples/c+build
+      script: earthly -P +examples
 
 
 

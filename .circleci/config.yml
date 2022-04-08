@@ -1,108 +1,47 @@
 version: 2.1
 jobs:
-  # run-tests:
-  #   machine:
-  #     image: ubuntu-2004:current
-  #   steps:
-  #     - checkout
-  #     # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-  #     - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-  #     - run: earthly --version
-  #     - run: earthly -P ./examples/c+unit-test
-  run-examples:
+  build:
     machine:
-      image: ubuntu-2004:current
+      image: ubuntu-2004:202201-02
     steps:
       - checkout
-      # - run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-      - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-      - run: earthly --version
-      - run: earthly -P +examples
+      - run:
+          name: Docker Login
+          command: "docker login registry-1.docker.io.mirror.corp.earthly.dev --username $DOCKERHUB_MIRROR_USERNAME --password $DOCKERHUB_MIRROR_TOKEN"
+      - run:
+          name: Install released earthly
+          command: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - run:
+          name: Build latest earthly
+          # earthly v0.6.5 has a bug that causes a panic when SUDO_USER is set to a user that the current user does not have read permission to. To Work-around this,
+          # we need to set SUDO_USER to "".
+          #
+          # This is due to circle CI running under the user "circleci" with SUDO_USER="root"; however the circleci user does not have access to /root/.earthly/config.yml
+          # therefore, we must unset the SUDO_USER; otherwise we will get this error: "open /root/.earthly/config.yml: permission denied"
+          #
+          # Once this bugfix is released, this can be undone.
+          command: SUDO_USER="" earthly --use-inline-cache +for-linux
+      - run:
+          name: Bootstrap
+          command: sudo ./build/linux/amd64/earthly bootstrap
+      - run:
+          name: Run tests
+          command: |-
+              ./build/linux/amd64/earthly --ci -P \
+                --build-arg DOCKERHUB_AUTH=true \
+                --build-arg DOCKERHUB_USER_SECRET=+secrets/earthly-technologies/dockerhub-mirror/user \
+                --build-arg DOCKERHUB_TOKEN_SECRET=+secrets/earthly-technologies/dockerhub-mirror/pass \
+                --build-arg DOCKERHUB_MIRROR=registry-1.docker.io.mirror.corp.earthly.dev \
+              +test
+      - run:
+          name: Execute fail test
+          command: "! ./build/linux/amd64/earthly --ci +test-fail"
 workflows:
-  build-and-test-workflow:
+  version: 2
+  circle-ci:
     jobs:
-      - run-examples
-
-# version: 2.1
-# jobs:
-#   test-c:
-#     docker:
-#       - image: "alpine"
-#     steps:
-#       - checkout
-#       - run: cat /etc/*-release
-#       - run:
-#           name: Installing SUDO
-#           command: 'apk update && apk add sudo'
-#       - run:
-#           name: Installing GCC
-#           command: 'apk update && apk add gcc g++'
-#       - run:
-#           name: Install build-base and make and cunit-dev
-#           command: sudo apk --update add build-base cmake cunit-dev
-#       - run:
-#           name: Creating Build Files
-#           command: 'cd ./examples/c/ && cmake test'
-#       - run:
-#           name: Run Make
-#           command: cd ./examples/c && make
-#       - run:
-#           name: Run Unit Tests
-#           command: ./examples/c/unit-test
-#   build-c:
-#     docker:
-#       - image: "alpine" 
-#     steps:
-#       - checkout
-#       - run:
-#           name: Installing SUDO
-#           command: 'apk update && apk add sudo'
-#       - run:
-#           name: Installing GCC
-#           command: 'apk update && apk add gcc g++'
-#       - run:
-#           name: Install build-base and make
-#           command: sudo apk --update add build-base cmake
-#       - run:
-#           name: Creating Build Files
-#           command: 'cmake ./examples/c/src'
-#       - run:
-#           name: Run Make
-#           command: make ./examples/c
-# workflows:
-#   build-and-test-workflow:
-#     jobs:
-#       - test-c
-#       - build-c:
-#           requires:
-#             - test-c
-
-# version: 2.1
-# jobs:
-#   test-c:
-#     docker:
-#       - image: "earthly/earthly"
-#     steps:
-#       - checkout
-#       # - run:
-#       #     name: Installing SUDO
-#       #     command: 'apk update && apk add sudo'
-#       # - run: apk add docker
-#       # - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-#       - run: earthly --version
-#       - run: earthly -P ./examples/c+unit-test
-#   build-c:
-#     docker:
-#       - image: "earthly/earthly"
-#     steps:
-#       # - checkout
-#       # - run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-#       - run: earthly --version
-#       - run: earthly -P ./examples/c+build
-# workflows:
-#   build-and-test-workflow:
-#     jobs:
-#       - test-c
-#       - build-c:
-#           requires:
-#             - test-c
+      - build:
+          filters:
+            branches:
+              only:
+                - main
