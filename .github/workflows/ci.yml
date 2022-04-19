@@ -2,9 +2,7 @@ name: GitHub Actions CI
 
 on:
   push:
-    branches: 
-      - main 
-      - building-example
+    branches: [ main, building-example ]
     paths-ignore: [ docs/** ]
   pull_request:
     branches: [ main ]
@@ -13,24 +11,24 @@ on:
 jobs:
   run-examples:
     runs-on: ubuntu-latest
-      steps:
-        - run: earthly -P +examples
-#   tests:
-#     name: +test +test-fail
-#     runs-on: ubuntu-latest
-#     env:
-#       FORCE_COLOR: 1
-#       EARTHLY_TOKEN: "${{ secrets.EARTHLY_TOKEN }}"
-#       EARTHLY_INSTALL_ID: "earthly-githubactions"
-#     steps:
-#       - uses: earthly/actions/setup-earthly@v1
-#       - uses: actions/checkout@v2
-#       - name: Docker mirror login (Earthly Only)
-#         run: docker login registry-1.docker.io.mirror.corp.earthly.dev --username "${{ secrets.DOCKERHUB_MIRROR_USERNAME }}" --password "${{ secrets.DOCKERHUB_MIRROR_PASSWORD }}"
-#         if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
-#       - name: Configure Earthly to use mirror (Earthly Only)
-#         run: |-
-#           earthly config global.buildkit_additional_config "'[registry.\"docker.io\"]
+    steps:
+      - run: earthly -P +examples
+  # tests:
+  #   name: +test +test-fail
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     FORCE_COLOR: 1
+  #     EARTHLY_TOKEN: "${{ secrets.EARTHLY_TOKEN }}"
+  #     EARTHLY_INSTALL_ID: "earthly-githubactions"
+  #   steps:
+  #     - uses: earthly/actions/setup-earthly@v1
+  #     - uses: actions/checkout@v2
+  #     - name: Docker mirror login (Earthly Only)
+  #       run: docker login registry-1.docker.io.mirror.corp.earthly.dev --username "${{ secrets.DOCKERHUB_MIRROR_USERNAME }}" --password "${{ secrets.DOCKERHUB_MIRROR_PASSWORD }}"
+  #       if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+  #     - name: Configure Earthly to use mirror (Earthly Only)
+  #       run: |-
+  #         earthly config global.buildkit_additional_config "'[registry.\"docker.io\"]
 
 #           mirrors = [\"registry-1.docker.io.mirror.corp.earthly.dev\"]'"
 #         if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
