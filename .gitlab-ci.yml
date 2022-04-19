@@ -8,7 +8,7 @@ stages:
 build-job:
   stage: build
   script:
-  - less /proc/cpuinfo
+  - cat /proc/cpuinfo
   - cat /etc/os-release
   - earthly -P +examples
 
