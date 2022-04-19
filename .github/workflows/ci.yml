@@ -15,9 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
-      - run: ls -lah
       - run: pwd
-      - run: earthly -P +examples
+      - run: ls -lah && earthly -P +examples
   # tests:
   #   name: +test +test-fail
   #   runs-on: ubuntu-latest
