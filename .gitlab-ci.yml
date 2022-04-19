@@ -11,6 +11,7 @@ build-job:
   script:
   - cat /proc/cpuinfo
   - cat /etc/os-release
+  - apt update && apt install wget
   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
   - earthly -P +examples
 
