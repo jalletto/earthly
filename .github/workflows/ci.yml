@@ -2,15 +2,17 @@ name: GitHub Actions CI
 
 on:
   push:
-    branches: [ main, building-example ]
+    branches: 
+      - main 
+      - building-example
     paths-ignore: [ docs/** ]
   pull_request:
     branches: [ main ]
     paths-ignore: [ docs/** ]
 
 jobs:
-    run-examples:
-      runs-on: ubuntu-latest
+  run-examples:
+    runs-on: ubuntu-latest
       steps:
         - run: earthly -P +examples
 #   tests:
