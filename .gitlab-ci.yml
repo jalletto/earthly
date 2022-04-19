@@ -1,13 +1,14 @@
 ---
-default:
-  image: ubuntu-2004:202201-02
+before_script:
+  - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+
+
 stages:          # List of stages for jobs, and their order of execution
   - build
 
 build-job:
   stage: build
   script:
-  - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
   - sleep 10
   - earthly -P +examples
 
