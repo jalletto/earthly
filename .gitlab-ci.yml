@@ -9,6 +9,6 @@ stages:          # List of stages for jobs, and their order of execution
 build-job:
   stage: build
   script:
-  - sleep 10
+  - cat /etc/os-release
   - earthly -P +examples
 
