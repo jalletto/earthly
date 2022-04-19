@@ -2,7 +2,9 @@ name: GitHub Actions CI
 
 on:
   push:
-    branches: [ main, building-example ]
+    branches: 
+      - main
+      - building-example
     paths-ignore: [ docs/** ]
   pull_request:
     branches: [ main ]
