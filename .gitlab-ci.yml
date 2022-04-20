@@ -1,5 +1,4 @@
 ---
-image: earthly/earthly
 # before_script:
 #   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 
@@ -7,6 +6,7 @@ stages:
   - build
 
 build-job:
+  image: earthly/earthly
   stage: build
   script:
   - cat /proc/cpuinfo
