@@ -11,7 +11,7 @@ build-job:
   script:
   - cat /proc/cpuinfo
   - cat /etc/os-release
-  # - apt update && apt install -y wget
+  - docker ps
   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
   - earthly -P +examples
 
