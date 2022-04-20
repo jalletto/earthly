@@ -14,7 +14,7 @@ before_script:
   - sudo /etc/init.d/docker start
   # - apt update && apt install -y docker-ce docker-ce-cli containerd.io
   # - service docker start
-  - sudo docker run hello-world
+  # - sudo docker run hello-world
   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 
 stages:
