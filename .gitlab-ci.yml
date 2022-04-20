@@ -1,5 +1,5 @@
 ---
-# image: docker:latest
+image: ubuntu:latest
 before_script:
   - apt update && apt install -y docker
   - service docker start
