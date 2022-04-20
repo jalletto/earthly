@@ -1,5 +1,5 @@
 ---
-image: docker:latest
+# image: docker:latest
 before_script:
   - apt update && apt install -y docker
   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
@@ -13,6 +13,6 @@ build-job:
   - cat /proc/cpuinfo
   - cat /etc/os-release
   # - apt update && apt install -y wget
-  - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
+  # - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
   - earthly -P +examples
 
