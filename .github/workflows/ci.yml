@@ -20,7 +20,6 @@ jobs:
       - run: ls -lah && earthly -P +examples
 
 
-
   # tests:
   #   name: +test +test-fail
   #   runs-on: ubuntu-latest
