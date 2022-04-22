@@ -1,35 +1,47 @@
 ---
-image: ubuntu:latest
-before_script:
-  - cat /proc/cpuinfo
-  - cat /etc/os-release
-  - df -h --output='size','pcent' /
-  - apt-get update
-  - apt-get install sudo -y
-  - apt-get install wget -y
-  - sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-  - apt-cache policy docker-ce
-  - sudo apt install docker-ce -y
-  - sudo /etc/init.d/docker start
-  # - apt update && apt install -y docker-ce docker-ce-cli containerd.io
-  # - service docker start
-  # - sudo docker run hello-world
-  - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+# image: ubuntu:latest
+# before_script:
+#   - cat /proc/cpuinfo
+#   - cat /etc/os-release
+#   - df -h --output='size','pcent' /
+#   - apt-get update
+#   - apt-get install sudo -y
+#   - apt-get install wget -y
+#   - sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+#   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+#   - apt-cache policy docker-ce
+#   - sudo apt install docker-ce -y
+#   - sudo /etc/init.d/docker start
+#   # - apt update && apt install -y docker-ce docker-ce-cli containerd.io
+#   # - service docker start
+#   # - sudo docker run hello-world
+#   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+build:
+  image: earthly/earthly:latest
+  stage: build
+  # services:
+  #   - docker:dind
+  # before_script:
+  #   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - earthly -P +examples
+  only:
+    - building-examples
+  retry: 2
 
 stages:
   - build
 
-build-job:
-  stage: build
-  script:
-  - df -h --output='size','pcent' /
-  - sudo /etc/init.d/docker start
-  - docker info
-  # - apt update && apt install -y wget
-  # - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
-  - sudo earthly -P +examples
+# build-job:
+#   stage: build
+#   script:
+#   - df -h --output='size','pcent' /
+#   - sudo /etc/init.d/docker start
+#   - docker info
+#   # - apt update && apt install -y wget
+#   # - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
+#   - sudo earthly -P +examples
 
 
 
