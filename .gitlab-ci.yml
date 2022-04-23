@@ -17,6 +17,7 @@ before_script:
   # - service docker start
   # - sudo docker run hello-world
   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+  
 # build:
 #   # variables: 
 #   #   DOCKER_HOST: https://hub.docker.com/
