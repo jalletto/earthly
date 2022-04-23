@@ -22,8 +22,8 @@ build:
   stage: build
   # services:
   #   - docker:dind
-  # before_script:
-  #   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - earthly -P +examples
   only:
@@ -42,8 +42,3 @@ stages:
 #   # - apt update && apt install -y wget
 #   # - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
 #   - sudo earthly -P +examples
-
-
-
-
-
