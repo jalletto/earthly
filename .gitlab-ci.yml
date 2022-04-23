@@ -18,14 +18,14 @@
 #   # - sudo docker run hello-world
 #   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 build:
-  variables: 
-    DOCKER_HOST: https://hub.docker.com/
+  # variables: 
+  #   DOCKER_HOST: https://hub.docker.com/
   image: earthly/earthly:latest
   stage: build
   # services:
   #   - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  # before_script:
+  #   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - earthly -P +examples
   only:
