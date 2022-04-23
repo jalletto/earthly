@@ -19,7 +19,7 @@
 #   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 build:
   variables: 
-    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_HOST: https://hub.docker.com/
   image: earthly/earthly:latest
   stage: build
   # services:
