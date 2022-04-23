@@ -20,8 +20,7 @@
 build:
   # variables: 
   #   DOCKER_HOST: https://hub.docker.com/
-  image: 
-    name: earthly/earthly:latest
+  image: "earthly/earthly:latest"
   stage: build
   # services:
   #   - docker:dind
