@@ -71,7 +71,7 @@ build-job:
   # - sudo /etc/init.d/docker start
   - sudo service docker start
   - sleep 10
-  - sudo systemctl restart docker.socket
+  - sudo service start docker.socket
   - curl --unix-socket /var/run/docker.sock  http://localhost/_ping; echo
   # - dockerd
   - docker info
