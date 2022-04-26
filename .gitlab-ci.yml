@@ -8,7 +8,7 @@ run-examples1:
   - cat /etc/os-release
   - apk update
   - apk add sudo  
-  - sudo apk install git
+  - sudo apk add git
   - git --version
   - df -h --output='size','pcent' \
   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
@@ -21,7 +21,7 @@ run-examples2:
   - cat /etc/os-release
   - apk update
   - apk add sudo  
-  - sudo apk install git
+  - sudo apk add git
   - git --version
   - df -h --output='size','pcent' \
   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
