@@ -4,7 +4,6 @@ before_script:
   - cat /proc/cpuinfo
   - cat /etc/os-release
   - curl -sSL https://get.docker.com/ | sh
-  # - df -h --output='size','pcent' /
   # - apk update
   # - apk add sudo 
   # - apk add wget 
