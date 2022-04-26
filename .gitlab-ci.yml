@@ -68,7 +68,8 @@ build-job:
   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 
   # - df -h --output='size','pcent' 
-  - sudo /etc/init.d/docker start
+  # - sudo /etc/init.d/docker start
+  - sudo service docker start
   - sleep 10
   # - dockerd
   - docker info
