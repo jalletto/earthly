@@ -30,6 +30,7 @@ build-job:
   image: ubuntu:latest
   stage: build
   script:
+  - apt-get sudo
   - sudo apt-get update
   - sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
   - curl -fsSL https://download.docker.com/linux/ubu... |  sudo apt-key add -
