@@ -46,7 +46,7 @@ build-job:
   image: ubuntu:latest
   stage: build
   script:
-  - apt-get update
+  - sudo apt-get update
   - apt install sudo -y
   - apt install wget -y
   - sudo apt-get install ca-certificates curl gnupg lsb-release -y
