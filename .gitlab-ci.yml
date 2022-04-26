@@ -16,7 +16,7 @@ before_script:
   # - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
   # - apt-cache policy docker-ce
   # - sudo apt install docker-ce -y
-  # - sudo /etc/init.d/docker start
+  - sudo /etc/init.d/docker start
   # - apt update && apt install -y docker-ce docker-ce-cli containerd.io
   # - service docker start
   # - sudo docker run hello-world
