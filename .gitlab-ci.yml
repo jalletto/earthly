@@ -3,10 +3,15 @@ image: docker:latest
 services:
   - docker:dind
 
+stages:
+  - run-examples1
+  - run-examples2
+
 run-examples1:
   script:
   - cat /proc/cpuinfo
   - cat /etc/os-release
+  - git --version
   - df -h --output='size','pcent' \
   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
   - earthly -P +examples1
