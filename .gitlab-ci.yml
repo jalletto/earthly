@@ -79,7 +79,7 @@ build-job:
   # - sleep 10
   # - sudo service start docker.socket
   # - curl --unix-socket /var/run/docker.sock  http://localhost/_ping; echo
-  # # - dockerd
+  - dockerd
   # - docker info
   # - apt update && apt install -y wget
   # - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
