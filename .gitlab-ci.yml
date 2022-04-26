@@ -18,12 +18,13 @@ build-job:
 #   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 #   - apt-cache policy docker-ce
 #   - sudo apt install docker-ce -y
-  - sudo /etc/init.d/docker start
+  # - sudo /etc/init.d/docker start
   - sudo dockerd
 #   - apt update && apt install -y docker-ce docker-ce-cli containerd.io
-#   # - service docker start
+  - service docker start
 #   # - sudo docker run hello-world
   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+  - sudo earthly -P +examples
 
 
 # build:
