@@ -26,6 +26,18 @@
 #   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 #   - sudo earthly -P +examples
 
+build-job:
+  image: docker:latest
+  stage: build
+  script:
+  - sudo apt-get update
+  - sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+  - curl -fsSL https://download.docker.com/linux/ubu... |  sudo apt-key add -
+  - sudo apt-key fingerprint 0EBFCD88
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get install docker-ce docker-ce-cli containerd.io
+  - sudo docker run hello-world
 
 # build:
 #   # variables: 
@@ -46,45 +58,45 @@
 #   - build
 
 
-build-job:
-  image: ubuntu:latest
-  stage: build
-  script:
-  - apt-get update
-  - apt-get install sudo -y
-  - apt-get install wget -y
-  - sudo apt-get install ca-certificates curl gnupg lsb-release -y
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-  -  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  - sudo apt-get update
-  - sudo apt-get install docker-ce docker-ce-cli containerd.io -y
-  # - cat /proc/cpuinfo
-  # - cat /etc/os-release
-  # - apt update
-  # - apt install curl -y
-  # # - curl -sSL https://get.docker.com/ | sh
-  # # - apk update
-  # # - apk add sudo 
-  # # - apk add wget 
-  # - sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-  # - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  # - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-  # - apt-cache policy docker-ce
-  # - sudo apt install docker-ce -y
-  # # - sudo /etc/init.d/docker start
-  # - apt update && apt install -y docker-ce docker-ce-cli containerd.io
-  # # - service docker start
-  # # - sudo docker run hello-world
-  - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+# build-job:
+#   image: ubuntu:latest
+#   stage: build
+#   script:
+#   - apt-get update
+#   - apt-get install sudo -y
+#   - apt-get install wget -y
+#   - sudo apt-get install ca-certificates curl gnupg lsb-release -y
+#   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+#   -  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#   - sudo apt-get update
+#   - sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+#   # - cat /proc/cpuinfo
+#   # - cat /etc/os-release
+#   # - apt update
+#   # - apt install curl -y
+#   # # - curl -sSL https://get.docker.com/ | sh
+#   # # - apk update
+#   # # - apk add sudo 
+#   # # - apk add wget 
+#   # - sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+#   # - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#   # - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+#   # - apt-cache policy docker-ce
+#   # - sudo apt install docker-ce -y
+#   # # - sudo /etc/init.d/docker start
+#   # - apt update && apt install -y docker-ce docker-ce-cli containerd.io
+#   # # - service docker start
+#   # # - sudo docker run hello-world
+#   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 
-  # # - df -h --output='size','pcent' 
-  # # - sudo /etc/init.d/docker start
-  - sudo service docker start
-  # - sleep 10
-  # - sudo service start docker.socket
-  - curl --unix-socket /var/run/docker.sock  http://localhost/_ping; echo
-  # - dockerd
-  # - docker info
-  # - apt update && apt install -y wget
-  # - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
-  - sudo earthly -P +examples
+#   # # - df -h --output='size','pcent' 
+#   # # - sudo /etc/init.d/docker start
+#   - sudo service docker start
+#   # - sleep 10
+#   # - sudo service start docker.socket
+#   - curl --unix-socket /var/run/docker.sock  http://localhost/_ping; echo
+#   # - dockerd
+#   - docker info
+#   # - apt update && apt install -y wget
+#   # - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
+#   - sudo earthly -P +examples
