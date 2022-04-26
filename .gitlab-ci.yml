@@ -6,6 +6,7 @@ before_script:
   - apt update
   - apt install curl -y
   - apt install sudo -y
+  - apt install wget -y
   - curl -sSL https://get.docker.com/ | sh
   # - apk update
   # - apk add sudo 
