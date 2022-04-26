@@ -15,7 +15,7 @@ run-examples1:
 
 run-examples2:
   stage: run-examples2
-  dependencies: [examples1]
+  dependencies: [run-examples1]
   script:
   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
   - earthly -P +examples2
