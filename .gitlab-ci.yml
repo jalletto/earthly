@@ -27,7 +27,7 @@
 #   - sudo earthly -P +examples
 
 build-job:
-  image: ubuntu:latest
+  # image: ubuntu:latest
   stage: build
   script:
   - apt-get update
