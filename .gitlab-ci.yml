@@ -75,7 +75,7 @@ build-job:
 
   # # - df -h --output='size','pcent' 
   # # - sudo /etc/init.d/docker start
-  # - sudo service docker start
+  - sudo service docker start
   # - sleep 10
   # - sudo service start docker.socket
   # - curl --unix-socket /var/run/docker.sock  http://localhost/_ping; echo
