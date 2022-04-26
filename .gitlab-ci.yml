@@ -46,7 +46,7 @@ build-job:
   image: ubuntu:latest
   stage: build
   script:
-   - cat /proc/cpuinfo
+  - cat /proc/cpuinfo
   - cat /etc/os-release
   - apt update
   - apt install curl -y
