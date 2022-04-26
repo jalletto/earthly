@@ -75,7 +75,7 @@ build-job:
 
   # # - df -h --output='size','pcent' 
   # # - sudo /etc/init.d/docker start
-  - echo "{ 'storage-driver': 'overlay2'}" > /etc/docker/daemon.json
+  - echo {"storage-driver": "overlay2"} > /etc/docker/daemon.json
   - sudo service docker start
   # - sleep 10
   # - sudo service start docker.socket
