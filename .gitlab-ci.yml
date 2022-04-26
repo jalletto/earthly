@@ -3,7 +3,7 @@ image: docker:latest
 before_script:
   - cat /proc/cpuinfo
   - cat /etc/os-release
-  - df -h --output='size','pcent' /
+  # - df -h --output='size','pcent' /
   - apk update
   - apk install sudo -y
   - apk install wget -y
