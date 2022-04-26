@@ -1,26 +1,26 @@
 ---
-image: ubuntu:latest
-before_script:
-  - cat /proc/cpuinfo
-  - cat /etc/os-release
-  - apt update
-  - apt install curl -y
-  - apt install sudo -y
-  - apt install wget -y
-  # - curl -sSL https://get.docker.com/ | sh
-  # - apk update
-  # - apk add sudo 
-  # - apk add wget 
-  - sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-  - apt-cache policy docker-ce
-  - sudo apt install docker-ce -y
-  # - sudo /etc/init.d/docker start
-  - apt update && apt install -y docker-ce docker-ce-cli containerd.io
-  # - service docker start
-  # - sudo docker run hello-world
-  - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+# image: ubuntu:latest
+# before_script:
+#   - cat /proc/cpuinfo
+#   - cat /etc/os-release
+#   - apt update
+#   - apt install curl -y
+#   - apt install sudo -y
+#   - apt install wget -y
+#   # - curl -sSL https://get.docker.com/ | sh
+#   # - apk update
+#   # - apk add sudo 
+#   # - apk add wget 
+#   - sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+#   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+#   - apt-cache policy docker-ce
+#   - sudo apt install docker-ce -y
+#   # - sudo /etc/init.d/docker start
+#   - apt update && apt install -y docker-ce docker-ce-cli containerd.io
+#   # - service docker start
+#   # - sudo docker run hello-world
+#   - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 
 
 # build:
@@ -42,8 +42,30 @@ before_script:
 #   - build
 
 build-job:
+  image: ubuntu:latest
   stage: build
   script:
+   - cat /proc/cpuinfo
+  - cat /etc/os-release
+  - apt update
+  - apt install curl -y
+  - apt install sudo -y
+  - apt install wget -y
+  # - curl -sSL https://get.docker.com/ | sh
+  # - apk update
+  # - apk add sudo 
+  # - apk add wget 
+  - sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+  - apt-cache policy docker-ce
+  - sudo apt install docker-ce -y
+  # - sudo /etc/init.d/docker start
+  - apt update && apt install -y docker-ce docker-ce-cli containerd.io
+  # - service docker start
+  # - sudo docker run hello-world
+  - sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.8/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+
   # - df -h --output='size','pcent' 
   - sudo /etc/init.d/docker start
   - sleep 10
