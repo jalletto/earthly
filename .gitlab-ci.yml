@@ -23,6 +23,7 @@ run-examples2:
   - apk update
   - apk add sudo  
   - sudo apk add git
+  - sudo apk add ca-certificates
   - git --version
   - df -h /
   - /bin/sh -c 'wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'
