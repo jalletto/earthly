@@ -526,8 +526,8 @@ examples1:
     BUILD ./examples/secrets+base
 
 examples2:
-    BUILD ./examples/readme/go1+all
-    BUILD ./examples/readme/go2+build
+    # BUILD ./examples/readme/go1+all
+    # BUILD ./examples/readme/go2+build
     BUILD ./examples/readme/proto+docker
     # TODO: This example is flaky for some reason.
     #BUILD ./examples/terraform+localstack

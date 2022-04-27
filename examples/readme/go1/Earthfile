@@ -4,7 +4,7 @@ RUN apk --update --no-cache add git
 WORKDIR /go-example
 
 all:
-  # BUILD +lint
+  BUILD +lint
   BUILD +docker
 
 build:
