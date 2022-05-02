@@ -4,43 +4,5 @@ install:
 
 jobs:
   include:
-    # - stage: test
-    #   script: earthly ./examples/c+unit-test
     - stage: build
       script: earthly -P +examples
-
-
-
-
-# language: c 
-
-# compiler:
-#   - gcc
-
-# jobs:
-#   include:
-#     - stage: test
-#       addons:
-#         apt:
-#           update: true
-#           packages:
-#           - cmake
-#           - libcunit1-dev
-#       script:
-#         - cd ./examples/c
-#         - cmake test
-#         - make
-#         - ./unit-test
-#     - stage: build
-#       addons:
-#         apt:
-#           update: true
-#           packages:
-#           - cmake
-#           - build-essential
-#       script:
-#         - cd ./examples/c
-#         - cmake src
-#         - make
-
-
