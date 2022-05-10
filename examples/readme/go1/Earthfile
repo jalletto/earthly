@@ -13,7 +13,7 @@ build:
   SAVE ARTIFACT build/go-example AS LOCAL build/go-example
 
 lint:
-  RUN go get golang.org/x/lint/golint
+  RUN go get -v golang.org/x/lint/golint
   COPY main.go .
   RUN golint -set_exit_status ./...
 

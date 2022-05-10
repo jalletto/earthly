@@ -504,17 +504,11 @@ examples1:
     ARG TARGETARCH
     BUILD ./examples/c+docker
     BUILD ./examples/cpp+docker
-    IF [ "$TARGETARCH" = "amd64" ]
-        # This only works on amd64 for now.
-        BUILD ./examples/dotnet+docker
-    END
+
     BUILD ./examples/elixir+docker
     BUILD ./examples/go+docker
     BUILD ./examples/grpc+test
-    IF [ "$TARGETARCH" = "amd64" ]
-        # This only works on amd64 for now.
-        BUILD ./examples/integration-test+integration-test
-    END
+
     BUILD ./examples/java+docker
     BUILD ./examples/js+docker
     BUILD ./examples/monorepo+all
@@ -528,15 +522,10 @@ examples1:
 examples2:
     BUILD ./examples/readme/go1+all
     BUILD ./examples/readme/go2+build
-    BUILD ./examples/readme/proto+docker
-    # TODO: This example is flaky for some reason.
-    #BUILD ./examples/terraform+localstack
+ 
     BUILD ./examples/ruby+docker
     BUILD ./examples/ruby-on-rails+docker
-    IF [ "$TARGETARCH" = "amd64" ]
-        # This crashes randomly on arm.
-        BUILD ./examples/scala+docker
-    END
+    #  
     BUILD ./examples/cobol+docker
     BUILD ./examples/rust+docker
     BUILD ./examples/multiplatform+all
